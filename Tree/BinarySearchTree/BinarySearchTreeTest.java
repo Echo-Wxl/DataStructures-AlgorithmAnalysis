@@ -1,12 +1,11 @@
-package MyBinaryTree;
+package BinarySearchTree;
 
-import jdk.jfr.StackTrace;
 import org.junit.Test;
 
-public class MyBinaryTreeTest {
+public class BinarySearchTreeTest {
     @Test
     public void test1() {
-        MyBinaryTree tree = new MyBinaryTree();
+        BinarySearchTree tree = new BinarySearchTree();
         tree.insert(4);
         tree.insert(2);
         tree.insert(5);

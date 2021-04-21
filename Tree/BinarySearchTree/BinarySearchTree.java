@@ -1,14 +1,14 @@
-package MyBinaryTree;
+package BinarySearchTree;
 
-import com.sun.source.tree.Tree;
 
-public class MyBinaryTree {
-    static class TreeNode{
+public class BinarySearchTree {
+    static class TreeNode {
         int val;
         TreeNode left;
         TreeNode right;
 
-        TreeNode() {}
+        TreeNode() {
+        }
 
         TreeNode(int val) {
             this.val = val;
@@ -23,7 +23,7 @@ public class MyBinaryTree {
 
     private TreeNode root;
 
-    public MyBinaryTree() {
+    public BinarySearchTree() {
         this.root = null;
     }
 
@@ -33,6 +33,7 @@ public class MyBinaryTree {
 
     /**
      * 如果树中存在含有val的结点，则返回true
+     *
      * @param val
      * @return
      */
@@ -42,6 +43,7 @@ public class MyBinaryTree {
 
     /**
      * 递归找到最小值
+     *
      * @return
      */
     public int findMin() {
@@ -54,6 +56,7 @@ public class MyBinaryTree {
 
     /**
      * 迭代找到最大值
+     *
      * @return
      */
     public int findMax() {
@@ -66,6 +69,7 @@ public class MyBinaryTree {
 
     /**
      * 插入元素
+     *
      * @param val
      */
     public void insert(int val) {
@@ -74,6 +78,7 @@ public class MyBinaryTree {
 
     /**
      * 移除元素
+     *
      * @param val
      */
     public void remove(int val) {
@@ -154,5 +159,12 @@ public class MyBinaryTree {
             System.out.println(root.val);
             printTree(root.right);
         }
+    }
+
+    public int height(TreeNode rt) {
+        if (rt == null) {
+            return 0;
+        }
+        return Math.max(height(rt.left), height(rt.right)) + 1;
     }
 }
