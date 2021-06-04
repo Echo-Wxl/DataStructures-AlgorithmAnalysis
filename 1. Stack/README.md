@@ -1,4 +1,3 @@
 # 栈
 
-![overview](READEME.assets/overview.png)
-
+![overview](README.assets/overview.png)
