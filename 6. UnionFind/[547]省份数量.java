@@ -41,7 +41,7 @@
 // 
 // 
 // Related Topics 深度优先搜索 并查集 
-// 👍 543 👎 0
+// 👍 563 👎 0
 
 
 //leetcode submit region begin(Prohibit modification and deletion)
@@ -69,20 +69,24 @@ class Solution {
         if (Find(x) != Find(y)) {
             count--;
         }
-        F[Find(x)] = Find(y);
+        F[Find(x)]  = Find(y);
     }
 
     public int findCircleNum(int[][] isConnected) {
-        int N = isConnected.length;
+        if (isConnected == null || isConnected[0] == null) {
+            return 0;
+        }
+        int n = isConnected.length;
+        Init(n);
 
-        Init(N);
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
-                if (isConnected[i][j] == 1) {
-                    Union(i, j);
+        for (int r = 0; r < n; r++) {
+            for (int c = 0; c < n; c++) {
+                if (isConnected[r][c] == 1) {
+                    Union(r, c);
                 }
             }
         }
+
         return count;
     }
 }
