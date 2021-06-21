@@ -1,37 +1,36 @@
-public class Solution{
-    class Node{
+public class Solution {
+    class Node {
         public int node = 0;
         public int risk = 0;
-        public Node(){}
-
-        public Node(int n, int r) {
-            node = n;
-            risk = r;
+        public Node() {
+        }
+        public Node(int a, int b) {
+            node = a;
+            risk = b;
         }
     }
-
-    public int getMinRiskValue(int n, int m, int[] x, int[] y, int[] w) {
+    public int getMinRiskValue(int n, int m,
+                               int[] x, int[] y, int[] w) {
         // 构建图的表示
         List<Node> G[] = new ArrayList[n + 1];
-        for (int i = 0; i < n+1; i++) {
+        for (int i = 0; i < n + 1; i++) {
             G[i] = new ArrayList<>();
         }
         for (int i = 0; i < m; i++) {
-            int a = x[i], b = y[i], c = w[i];
-            G[a].add(new Node(b,c));
+            final int a = x[i], b = y[i], c = w[i];
+            G[a].add(new Node(b, c));
             G[b].add(new Node(a, c));
         }
         int[] risk = new int[n + 1];
-        for (int i = 0; i <n+1 ; i++) {
+        for (int i = 0; i <= n; i++) {
             risk[i] = Integer.MAX_VALUE;
         }
-
-        // java最小堆
-        Queue<Integer> Q = new PriorityQueue<>((v1, v2)->risk[v1]-risk[v2]);
-
+        // java小堆
+        Queue<Integer> Q = new PriorityQueue<>(
+                (v1, v2) -> risk[v1] - risk[v2]);
+        // 把起始点入堆
         Q.offer(0);
         risk[0] = 0;
-
         while (!Q.isEmpty()) {
             int cur = Q.poll();
             for (Node next : G[cur]) {
