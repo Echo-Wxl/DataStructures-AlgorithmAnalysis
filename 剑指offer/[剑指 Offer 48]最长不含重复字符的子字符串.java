@@ -41,7 +41,20 @@
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public int lengthOfLongestSubstring(String s) {
-
+        final int N = s.length();
+        int[] pos = new int[256];
+        Arrays.fill(pos, -1);
+        int left = -1;
+        int ans = 0;
+        for (int i = 0; i < N; i++) {
+            int idx = (int) s.charAt(i);
+            while (pos[idx] > left) {
+                left = pos[idx];
+            }
+            pos[idx] = i;
+            ans = Math.max(ans, i-left);
+        }
+        return ans;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
