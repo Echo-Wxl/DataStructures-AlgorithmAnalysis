@@ -1,77 +1,93 @@
 //给你一个字符串 s 、一个字符串 t 。返回 s 中涵盖 t 所有字符的最小子串。如果 s 中不存在涵盖 t 所有字符的子串，则返回空字符串 "" 。 
 //
-// 注意：如果 s 中存在这样的子串，我们保证它是唯一的答案。 
 //
-// 
 //
-// 示例 1： 
+// 注意：
 //
-// 
+//
+// 对于 t 中重复字符，我们寻找的子字符串中该字符数量必须不少于 t 中该字符数量。
+// 如果 s 中存在这样的子串，我们保证它是唯一的答案。
+//
+//
+//
+//
+// 示例 1：
+//
+//
 //输入：s = "ADOBECODEBANC", t = "ABC"
 //输出："BANC"
-// 
 //
-// 示例 2： 
 //
-// 
+// 示例 2：
+//
+//
 //输入：s = "a", t = "a"
 //输出："a"
-// 
 //
-// 
 //
-// 提示： 
+// 示例 3:
 //
-// 
-// 1 <= s.length, t.length <= 105 
-// s 和 t 由英文字母组成 
-// 
 //
-// 
-//进阶：你能设计一个在 o(n) 时间内解决此问题的算法吗？ Related Topics 哈希表 双指针 字符串 Sliding Window 
-// 👍 1144 👎 0
+//输入: s = "a", t = "aa"
+//输出: ""
+//解释: t 中两个字符 'a' 均应包含在 s 的子串中，
+//因此没有符合条件的子字符串，返回空字符串。
+//
+//
+//
+// 提示：
+//
+//
+// 1 <= s.length, t.length <= 105
+// s 和 t 由英文字母组成
+//
+//
+//
+//进阶：你能设计一个在 o(n) 时间内解决此问题的算法吗？ Related Topics 哈希表 字符串 滑动窗口
+// 👍 1263 👎 0
 
 
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public String minWindow(String s, String t) {
-        final int slen = s==null ? 0:s.length();
-        final int tlen = t==null ? 0:t.length();
+        int len1 = s.length();
+        int len2 = t.length();
 
-        int[] tcnt = new int[256];
-        int tCount = 0;
-        for (int i = 0; i < tlen; i++) {
-            tcnt[t.charAt(i)]++;
-            if (tcnt[t.charAt(i)] == 1) {
-                tCount++;
+        int[] tCnt = new int[256];
+        int tItems = 0;
+        for (int i = 0; i < len2; i++) {
+            tCnt[t.charAt(i)]++;
+            if (tCnt[t.charAt(i)] == 1) {
+                tItems++;
             }
         }
 
+        int[] sCnt = new int[256];
         int left = -1;
-        int ans = slen+1;
-        int[] scnt = new int[256];
-        int equalCount = 0;
         int start = 0;
-        for (int i = 0; i < slen; i++) {
+        int ans = len1+1;
+        int equal = 0;
+
+        for (int i = 0; i < len1; i++) {
             Character ch = s.charAt(i);
-            scnt[ch]++;
-            if (scnt[ch] == tcnt[ch]) {
-                equalCount++;
+            sCnt[ch]++;
+            if (sCnt[ch] == tCnt[ch]) {
+                equal++;
             }
-            while (equalCount > tCount) {
+
+            while (equal >= tItems) {
                 if (ans > i - left) {
                     start = left+1;
-                    ans = i -left;
+                    ans = i-left;
                 }
-                Character rm = s.charAt(++left);
-                if (scnt[rm] == tcnt[rm]) {
-                    equalCount--;
+                Character old = s.charAt(++left);
+                if (tCnt[old] == sCnt[old]) {
+                    equal--;
                 }
-                scnt[rm]--;
+                sCnt[old]--;
             }
         }
-        return ans<=N? s.substring(start, start+ans):new String("");
+        return ans <= len1 ? s.substring(start, start + ans) : new String("");
     }
-
 }
 //leetcode submit region end(Prohibit modification and deletion)
