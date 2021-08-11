@@ -24,9 +24,9 @@ public class heapSort {
     }
 
     public void minHeapFixDown(int[] arr, int i, int n) {
-        int j = 2*i+1;
+        int j = 0;
 
-        while (j < n) {
+        while ((j=(i<<1)+1) < n) {
             if (j + 1 < n && arr[j + 1] > arr[j]) {
                 j++;
             }
@@ -37,7 +37,6 @@ public class heapSort {
             swap(arr, i, j);
 
             i = j;
-            j = 2*i+1;
         }
     }
 

@@ -53,7 +53,7 @@ class Solution {
         }
         dp[start + 1] = Math.max(0, Math.max(A[start], A[start + 1]));
         for (int i = start+2; i < end; i++) {
-            dp[i] = Math.max(dp[i - 1], dp[i - 2] + 1);
+            dp[i] = Math.max(dp[i - 1], dp[i - 2] + nums[i]);
         }
         return dp[end - 1];
     }
