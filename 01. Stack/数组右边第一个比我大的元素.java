@@ -20,9 +20,9 @@ class Solution{
         int[] ans = new int[N];
         Stack<Integer> stack = new Stack<>();
 
-        for (int i = 0; i < A; i++) {
+        for (int i = 0; i < A.length; i++) {
             int cur = A[i];
-            while (!stack.isEmpty() || A[stack.peek()] < cur) {
+            while (!stack.isEmpty() && A[stack.peek()] < cur) {
                 ans[stack.peek()] = i;
                 stack.pop();
             }
@@ -33,6 +33,6 @@ class Solution{
             ans[stack.peek()] = -1;
             stack.pop();
         }
-        return stack.size();
+        return ans;
     }
 }

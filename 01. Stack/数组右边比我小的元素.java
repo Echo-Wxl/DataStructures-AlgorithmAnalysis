@@ -19,7 +19,7 @@ class Solution{
         int[] ans = new int[N];
         for (int i = 0; i < N; i++) {
             int cur = A[i];
-            while (!stack.isEmpty() || A[stack.peek()] > cur) {
+            while (!stack.isEmpty() && A[stack.peek()] > cur) {
                 ans[stack.peek()] = i;
                 stack.pop();
             }
